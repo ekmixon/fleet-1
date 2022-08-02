@@ -22,7 +22,7 @@ import pprint
 
 # Step 1: Fetch Discovery document.
 ROOT_URL = "http://localhost:8080/"
-DISCOVERY_URI = ROOT_URL + "fleet/v1/discovery"
+DISCOVERY_URI = f"{ROOT_URL}fleet/v1/discovery"
 h = httplib2.Http()
 resp, content = h.request(DISCOVERY_URI)
 discovery = json.loads(content)
@@ -41,7 +41,7 @@ def createNewMethod(name, method):
       if pconfig['location'] == 'path' and pname in kwargs:
         del kwargs[pname]
     if kwargs:
-      url = url + '?' + urllib.urlencode(kwargs)
+      url = f'{url}?{urllib.urlencode(kwargs)}'
     return h.request(url, method=method['httpMethod'], body=body,
                      headers={'content-type': 'application/json'})
 
